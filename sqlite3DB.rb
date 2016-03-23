@@ -2,7 +2,9 @@ require 'sequel'
 require 'sqlite3'
 require 'faker'
 
-database = Sequel.sqlite('sqpsandbox.sqlite3')
+
+
+database = Sequel.sqlite("#{ ARGV[0] }.sqlite3")
 
 database.run "CREATE TABLE artists (id integer primary key autoincrement, name varchar(255))"
 database.run "CREATE TABLE albums (id integer primary key autoincrement, title varchar(255), artist_id integer foriegn key)"
