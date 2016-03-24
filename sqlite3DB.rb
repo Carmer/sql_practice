@@ -12,9 +12,9 @@ database.run "CREATE TABLE people (id integer primary key autoincrement, name va
 database.run "CREATE TABLE owned_albums (id integer primary key autoincrement, person_id integer foriegn key, album_id integer foriegn key)"
 
 
-100.times do
+(ARGV[1].to_i).times do
   database.from(:artists).insert(:name => "#{Faker::Hacker.ingverb.capitalize} #{Faker::Team.creature.capitalize}")
-  database.from(:albums).insert(:title => "#{Faker::Hipster.sentence.capitalize}", artist_id: (1..100).to_a.sample )
+  database.from(:albums).insert(:title => "#{Faker::Hipster.sentence.capitalize}", artist_id: (1..ARGV[1].to_i).to_a.sample )
   database.from(:people).insert(:name => "#{Faker::Name.name}" )
-  database.from(:owned_albums).insert(:person_id => (1..100).to_a.sample, :album_id => (1..100).to_a.sample)
+  database.from(:owned_albums).insert(:person_id => (1..ARGV[1].to_i).to_a.sample, :album_id => (1..ARGV[1].to_i).to_a.sample)
 end
